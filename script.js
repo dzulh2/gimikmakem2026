@@ -317,3 +317,12 @@ function resetSystem() {
   addLog("SYSTEM RESET COMPLETE");
   switchPhase('phase-auth');
 }
+
+// Register Service Worker for Offline Support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(() => console.log('Offline Cache Ready'))
+      .catch((err) => console.log('Cache failed:', err));
+  });
+}
